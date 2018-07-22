@@ -17,7 +17,7 @@ const orderSammary = (props)=>{
             <ul>
                 {ingredientSummary}
             </ul>
-            <p>Price: <strong>{props.price}</strong>$</p>
+            <p>Price: <strong>{props.price.toFixed(2)}</strong>$</p>
             <button>Continue to Checkout?</button>
         </Wrap>
     );
