@@ -18,7 +18,9 @@ const orderSammary = (props)=>{
                 {ingredientSummary}
             </ul>
             <p>Price: <strong>{props.price.toFixed(2)}</strong>$</p>
-            <button>Continue to Checkout?</button>
+            <p>Continue to Checkout?</p>
+            <button>Cencel</button>
+            <button>Continue</button>
         </Wrap>
     );
     
