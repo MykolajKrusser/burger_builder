@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Wrap from '../../../hoc/Wrap';
+import Wrap from '../../../hoc/Wrap/Wrap';
 import Button from '../../Ui/Button/Button';
 
 class OrderSammary extends Component {
