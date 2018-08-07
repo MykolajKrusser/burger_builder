@@ -4,6 +4,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/Ui/Modal/Modal';
 import OrderSummery from '../../components/Burger/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
 
 
 const INGREDIENT_PRICES = {
@@ -35,7 +36,7 @@ class BurgerBuilder extends Component{
             .reduce((sum, el, index, array)=>{
                 return sum + el
             }, 0)
-            console.log(sum)
+            //console.log(sum)
             this.setState({purchasable: sum > 0})
     }
     
@@ -79,7 +80,26 @@ class BurgerBuilder extends Component{
     }
 
     purchasContinueHandler = ()=>{
-        alert("You continue!")
+        //alert("You continue!")
+        const order = {
+            ingredients: this.state.ingredients,
+            price: this.state.totalPrice,
+            customer: {
+                name: 'Nicolas',
+                address: {
+                    street: "street 1/a",
+                    zipcode: "55-200",
+                    country: "Poland"
+                },
+                email: "email@mail.com"
+            },
+            deliveryMethod: 'Fedex'
+        }
+        axios.post('/orders.json', order)
+            .then(response=>{
+                console.log(response)
+            })
+            .catch(error=> console.log(error))
     }
     render(){
         const disableInfo ={
