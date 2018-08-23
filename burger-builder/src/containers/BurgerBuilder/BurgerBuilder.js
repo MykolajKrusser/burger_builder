@@ -28,6 +28,7 @@ class BurgerBuilder extends Component{
     }
 
     componentDidMount(){
+        //console.log(this.props)
       axios.get('https://burger-app-4c52d.firebaseio.com/ingredients.json')
         .then(respons=>{
             this.setState({ingredients: respons.data})
@@ -89,29 +90,30 @@ class BurgerBuilder extends Component{
     }
 
     purchasContinueHandler = ()=>{
-        //alert("You continue!")
-        this.setState({loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Nicolas',
-                address: {
-                    street: "street 1/a",
-                    zipcode: "55-200",
-                    country: "Poland"
-                },
-                email: "email@mail.com"
-            },
-            deliveryMethod: 'Fedex'
-        }
-        axios.post('/orders.json', order)
-            .then(response=>{
-                this.setState({loading: false, purchasing: false})
-            })
-            .catch(
-                error => {this.setState({loading: false, purchasing: false})}
-            )
+        // alert("You continue!")
+        // this.setState({loading: true})
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'Nicolas',
+        //         address: {
+        //             street: "street 1/a",
+        //             zipcode: "55-200",
+        //             country: "Poland"
+        //         },
+        //         email: "email@mail.com"
+        //     },
+        //     deliveryMethod: 'Fedex'
+        // }
+        // axios.post('/orders.json', order)
+        //     .then(response=>{
+        //         this.setState({loading: false, purchasing: false})
+        //     })
+        //     .catch(
+        //         error => {this.setState({loading: false, purchasing: false})}
+        //     )
+        this.props.history.push('/checkout')
     }
     render(){
         const disableInfo ={
