@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Order from '../../components/Order/Order';
+import Loader from '../../components/Ui/Loader/Loader';
 
 class Orders extends Component{
     state={
@@ -38,6 +39,10 @@ class Orders extends Component{
             orders = messege
         }
 
+        if (this.state.loading){
+            orders=<Loader/>
+        }
+        
         return(
             <div>
                 {orders}
