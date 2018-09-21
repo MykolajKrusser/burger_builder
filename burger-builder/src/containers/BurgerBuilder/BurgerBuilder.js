@@ -29,13 +29,13 @@ class BurgerBuilder extends Component{
 
     componentDidMount(){
         //console.log(this.props)
-      axios.get('https://burger-app-4c52d.firebaseio.com/ingredients.json')
-        .then(respons=>{
-            this.setState({ingredients: respons.data})
-        })
-        .catch(error=>{
-            this.setState({error: true})
-        });
+    //   axios.get('https://burger-app-4c52d.firebaseio.com/ingredients.json')
+    //     .then(respons=>{
+    //         this.setState({ingredients: respons.data})
+    //     })
+    //     .catch(error=>{
+    //         this.setState({error: true})
+    //     });
     }
 
     updatePurcgaseState(ingredients){
