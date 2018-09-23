@@ -12,7 +12,6 @@ import axios from '../../axios-orders';
 
 class BurgerBuilder extends Component{
     state = {
-        purchasable: false,
         purchasing: false,
         loading: false,
         error: false
@@ -38,7 +37,7 @@ class BurgerBuilder extends Component{
                 return sum + el
             }, 0)
             //console.log(sum)
-            this.setState({purchasable: sum > 0})
+            return sum > 0;
     }
     
     purchasingHandler = ()=>{
@@ -84,7 +83,7 @@ class BurgerBuilder extends Component{
                         ingredienAdded={this.props.onIngredientAdded}
                         ingredientRemove={this.props.onIngredientRemoved}
                         disabled={disableInfo}
-                        purchasable = {this.state.purchasable}
+                        purchasable = {this.updatePurcgaseState(this.props.ings)}
                         price={this.props.prc}
                         purchasing={this.purchasingHandler}/>
                 </Wrap>
@@ -114,7 +113,8 @@ class BurgerBuilder extends Component{
 const mapStateToProps = state =>{
     return {
         ings: state.ingredients,
-        prc: state.totalprice
+        prc: state.totalprice,
+        purchasable : state.purchasable
     };
 }
 
