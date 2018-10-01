@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actionsType from '../../store/actions';
+import * as actionsType from '../../store/actions/actionTypes';
 import Wrap from '../../hoc/Wrap/Wrap';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
