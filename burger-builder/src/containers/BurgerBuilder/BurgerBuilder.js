@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actionsType from '../../store/actions/actionTypes';
+import * as burgerBuilderActions from '../../store/actions/index';
 import Wrap from '../../hoc/Wrap/Wrap';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -111,8 +111,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        onIngredientAdded: (ingName)=> dispatch({type: actionsType.ADD_INGREDIENT, ingredientName: ingName}),
-        onIngredientRemoved: (ingName)=> dispatch({type: actionsType.REEMOVE_INGREDIENT, ingredientName: ingName})
+        onIngredientAdded: (ingName)=> dispatch(burgerBuilderActions.addIngredient(ingName)),
+        onIngredientRemoved: (ingName)=> dispatch(burgerBuilderActions.removeIngredient(ingName))
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(BurgerBuilder, axios));
