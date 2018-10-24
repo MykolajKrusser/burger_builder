@@ -12,20 +12,11 @@ import axios from '../../axios-orders';
 
 class BurgerBuilder extends Component{
     state = {
-        purchasing: false,
-        loading: false,
-        error: false
+        purchasing: false
     }
 
     componentDidMount(){
         console.log(this.props)
-       axios.get('https://burger-app-4c52d.firebaseio.com/ingredients.json')
-         .then(respons=>{
-             this.setState({ingredients: respons.data})
-         })
-         .catch(error=>{
-             this.setState({error: true})
-         });
     }
 
     updatePurcgaseState(ingredients){
@@ -85,11 +76,6 @@ class BurgerBuilder extends Component{
                 purchasContinue={this.purchasContinueHandler}
                 purchasCancel={this.modalClosedHandler}/>
         }
-
-        if(this.state.loading){
-            orderSummary = <Loader/>
-        }
-
         return(
             <Wrap>
                 <Modal show={this.state.purchasing} modalClosed={this.modalClosedHandler}>
