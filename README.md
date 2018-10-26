@@ -11,7 +11,7 @@ The task of the application is to create a hamburger from different ingredients,
 ## Technologies
 Project is created with:
 * React v16.4.1
-* React-Redux: v5.0.7
+* React-Redux v5.0.7
 * Redux-thunk  v2.3.0
 * Axios v0.18.0
 * Google Firebase
@@ -24,4 +24,3 @@ $ cd ../burger_builder
 $ npm install
 $ npm start
 ```
-
