@@ -5,6 +5,8 @@ import Button from '../../../components/Ui/Button/Button';
 import Loader from '../../../components/Ui/Loader/Loader';
 import Input from '../../../components/Ui/Input/Input';
 import axios from '../../../axios-orders';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component{
     state={
@@ -112,7 +114,6 @@ class ContactData extends Component{
 
     orderHandler = (event)=>{
         event.preventDefault();
-        this.setState({loading: true})
         const formData = {}
         for (let i in this.state.orderForm){
             formData[i] = this.state.orderForm[i].value;
@@ -122,6 +123,7 @@ class ContactData extends Component{
             price: this.props.prc,
             orderData: formData
         }
+        this.props.purchaseBurgerStart(order)
     }
 
     inputChangedHandler = (event, inputIdentifier)=>{
@@ -194,4 +196,8 @@ const mapStateToProps = state =>{
     }
 }
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch =>{
+    onOrderBurger: (orderData)=> dispatch(actions.purchaseBurgerStart(orderData))
+}
+
+export default connect(mapStateToProps)(withErrorHandler(ContactData, axios));
