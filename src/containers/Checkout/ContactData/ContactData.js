@@ -122,7 +122,7 @@ class ContactData extends Component{
             price: this.props.prc,
             orderData: formData
         }
-        this.props.purchaseBurger(order)
+        this.props.onOrderBurger(order)
     }
 
     inputChangedHandler = (event, inputIdentifier)=>{
