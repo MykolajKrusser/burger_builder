@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as burgerBuilderActions from '../../store/actions/index';
+import * as actions from '../../store/actions/index';
 import Wrap from '../../hoc/Wrap/Wrap';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -16,8 +16,8 @@ class BurgerBuilder extends Component{
     }
 
     componentDidMount(){
-        console.log(this.props)
-        this.props.onInitIngredients()
+        console.log(this.props);
+        this.props.onInitIngredients();
     }
 
     updatePurcgaseState(ingredients){
@@ -33,16 +33,17 @@ class BurgerBuilder extends Component{
     }
     
     purchasingHandler = ()=>{
-        this.setState({purchasing: true})
+        this.setState({purchasing: true});
     }
 
     modalClosedHandler = ()=>{
-        this.setState({purchasing: false})
+        this.setState({purchasing: false});
     }
 
     purchasContinueHandler = ()=>{
         // alert("You continue!")
-        this.props.history.push('/checkout')
+        this.props.onInitPurchase();
+        this.props.history.push('/checkout');
     }
     render(){
         const disableInfo ={
@@ -95,13 +96,14 @@ const mapStateToProps = state =>{
         purchasable : state.burgerBuilder.purchasable,
         error: state.burgerBuilder.error
     };
-}
+};
 
 const mapDispatchToProps = dispatch =>{
     return{
-        onIngredientAdded: (ingName)=> dispatch(burgerBuilderActions.addIngredient(ingName)),
-        onIngredientRemoved: (ingName)=> dispatch(burgerBuilderActions.removeIngredient(ingName)),
-        onInitIngredients: ()=> dispatch(burgerBuilderActions.initIngredients())
+        onIngredientAdded: (ingName)=> dispatch(actions.addIngredient(ingName)),
+        onIngredientRemoved: (ingName)=> dispatch(actions.removeIngredient(ingName)),
+        onInitIngredients: ()=> dispatch(actions.initIngredients()),
+        onInitPurchase: ()=> dispatch(actions.purchaseInit())
     };
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(BurgerBuilder, axios));
