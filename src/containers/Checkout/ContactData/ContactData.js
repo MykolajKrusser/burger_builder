@@ -92,38 +92,46 @@ class ContactData extends Component{
             }
         },
         formIsValid: false
-    }
+    };
     
     checkValidity(value, rules){
         let isValid = true;
         if(!rules){
             return true;
-        }
+        };
         if (rules.required){
             isValid = value.trim() !== '' && isValid;
-        }
+        };
         if (rules.minLength){
             isValid = value.length >= rules.minLength && isValid;
-        }
-        if (rules.minLength){
+        };
+        if (rules.maxLength){
             isValid = value.length <= rules.maxLength && isValid;
-        }
-        return isValid
-    }
+        };
+        if (rules.isEmail) {
+            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+            isValid = pattern.test(value) && isValid
+        };
+        if (rules.isNumeric) {
+            const pattern = /^\d+$/;
+            isValid = pattern.test(value) && isValid
+        };
+        return isValid;
+    };
 
     orderHandler = (event)=>{
         event.preventDefault();
-        const formData = {}
+        const formData = {};
         for (let i in this.state.orderForm){
             formData[i] = this.state.orderForm[i].value;
-        }
+        };
         const order = {
             ingredients: this.props.ings,
             price: this.props.prc,
             orderData: formData
-        }
-        this.props.onOrderBurger(order)
-    }
+        };
+        this.props.onOrderBurger(order);
+    };
 
     inputChangedHandler = (event, inputIdentifier)=>{
         //console.log(event.target.value)
@@ -141,12 +149,12 @@ class ContactData extends Component{
         let formIsValid = true;
         for (let inputIdentifier in updatedOrderForm){
             formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid
-        }
+        };
 
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid})
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
 
-    }
+    };
 
     render(){
         const formElementsArray = [];
@@ -155,8 +163,8 @@ class ContactData extends Component{
                 id: key,
                 config: this.state.orderForm[key],
 
-            })
-        }
+            });
+        };
         let form = (
             <form onSubmit={this.orderHandler}>
                 {formElementsArray.map( formElement => (
@@ -176,7 +184,7 @@ class ContactData extends Component{
             );
         if (this.props.loading){
             form = <Loader/>
-        }
+        };
         return(
             <div className={classes.ContactData}>
                 <h4>
@@ -185,21 +193,21 @@ class ContactData extends Component{
                 {form}
             </div>
         );
-    }
-}
+    };
+};
 
 const mapStateToProps = state =>{
     return {
         ings: state.burgerBuilder.ingredients,
         prc: state.burgerBuilder.totalprice,
         loading : state.order.loading
-    }
-}
+    };
+};
 
 const mapDispatchToProps = dispatch =>{
     return{
         onOrderBurger: (orderData)=> dispatch(actions.purchaseBurger(orderData))
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
