@@ -33,7 +33,11 @@ class BurgerBuilder extends Component{
     }
     
     purchasingHandler = ()=>{
-        this.setState({purchasing: true});
+        if(this.props.isAuthenticated){
+            this.setState({purchasing: true});
+        }else{
+            this.props.history.push('/auth');
+        }
     }
 
     modalClosedHandler = ()=>{
@@ -69,7 +73,8 @@ class BurgerBuilder extends Component{
                         disabled={disableInfo}
                         purchasable = {this.updatePurcgaseState(this.props.ings)}
                         price={this.props.prc}
-                        purchasing={this.purchasingHandler}/>
+                        purchasing={this.purchasingHandler}
+                        isAuth={this.props.isAuthenticated}/>
                 </Wrap>
             );
             orderSummary= <OrderSummery
@@ -94,7 +99,8 @@ const mapStateToProps = state =>{
         ings: state.burgerBuilder.ingredients,
         prc: state.burgerBuilder.totalprice,
         purchasable : state.burgerBuilder.purchasable,
-        error: state.burgerBuilder.error
+        error: state.burgerBuilder.error,
+        isAuthenticated : state.auth.token !== null
     };
 };
 
