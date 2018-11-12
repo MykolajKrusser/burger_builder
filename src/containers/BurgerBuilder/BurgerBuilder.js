@@ -16,7 +16,6 @@ class BurgerBuilder extends Component{
     }
 
     componentDidMount(){
-        console.log(this.props);
         this.props.onInitIngredients();
     }
 
@@ -28,7 +27,6 @@ class BurgerBuilder extends Component{
             .reduce((sum, el, index, array)=>{
                 return sum + el
             }, 0)
-            //console.log(sum)
             return sum > 0;
     }
     
