@@ -13,12 +13,20 @@ describe('<NavigationItems/>' , ()=>{
     beforeEach(()=>{
         wrapper = shallow(<NavigationItems/>);
     });
+
     it('should render two <NavigationItems/> elements, if not authenticated', ()=>{
         expect(wrapper.find(NavigationItem)).toHaveLength(2);
     });
+
     it('should render three <NavigationItems/> elements, if authenticated', ()=>{
         // const wrapper = shallow(<NavigationItems isAuthenticated/>);
         wrapper.setProps({isAuthenticated: true});
         expect(wrapper.find(NavigationItem)).toHaveLength(3);
+    });
+
+    it('should render <NavigationItem link=logout>Logout</NavigationItem> element, if authenticated', ()=>{
+        // const wrapper = shallow(<NavigationItems isAuthenticated/>);
+        wrapper.setProps({isAuthenticated: true});
+        expect(wrapper.contains(<NavigationItem link='/logout'>Logout</NavigationItem>)).toEqual(true);
     });
 });
