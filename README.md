@@ -1,5 +1,7 @@
 # Burger_builder App
 
+<a href='https://burger-app-4c52d.firebaseapp.com/' target='_blank' rel="noopener noreferrer">see online</a>
+
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
@@ -12,8 +14,6 @@ The task of the application is to create a hamburger from different ingredients,
 Project is created with:
 * React v16.4.1
 * React-Redux v5.0.7
-* Redux-thunk  v2.3.0
-* Axios v0.18.0
 * Google Firebase
 	
 ## Setup
